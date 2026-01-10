@@ -3,6 +3,7 @@
   --background: #1b1c1d;
   --background-light: #242424;
   --border: #313232;
+  --green: #27c21f;
   --red: #ff4545;
 }
 
@@ -18,12 +19,13 @@ main {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-width: 65ch;
+  max-width: 640px;
   margin: 0 auto;
 }
 
 header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1rem;
@@ -60,7 +62,8 @@ p {
 
 .metadata {
   display: flex;
-  gap: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
 }
 
 .metadata p {
@@ -69,6 +72,7 @@ p {
 
 .buttons {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 
@@ -76,28 +80,20 @@ p {
 
 button {
   all: unset;
-  background: var(--background-light);
+  background: var(--background);
   color: white;
   display: flex;
   align-items: center;
   gap: 0.25rem;
   padding: 0.25rem 0.5rem;
-  border-radius: 8px;
-  align-self: flex-start;
   font-weight: 600;
-  transition: background-color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 button:hover {
-  background: #3f638b;
-}
-
-.buttons button {
-  opacity: 0.75;
-}
-
-li:hover button {
-  opacity: 1;
+  background: #505559;
 }
 
 button:hover {
@@ -114,8 +110,15 @@ dialog {
   background: var(--background);
   color: white;
   border: none;
-  border-radius: 8px;
-  padding: 1rem;
+  padding: 1.5rem;
+}
+
+dialog hgroup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 2rem;
 }
 
 ::backdrop {
@@ -131,8 +134,11 @@ dialog {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: auto;
-  border-radius: 100%;
+  background: var(--background-light);
+}
+
+#close-dialog:hover {
+  background: var(--red);
 }
 
 /* Form */
@@ -141,7 +147,6 @@ form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 300px;
 }
 
 form p {
@@ -157,13 +162,34 @@ p:has(#is-read) {
 }
 
 label {
-  font-size: 12px;
+  color: gray;
 }
 
 input[type="text"],
 input[type="number"] {
   all: unset;
-  border-radius: 4px;
   border: 1px solid var(--border);
   padding: 0.25rem 0.5rem;
+}
+
+button[type="submit"] {
+  background: var(--green);
+  align-self: start;
+}
+
+/* Mobile View */
+
+@media screen and (max-width: 640px) {
+  button {
+    background: var(--background-light);
+  }
+
+  .buttons button {
+    opacity: 1;
+  }
+
+  li {
+    flex-direction: column;
+    align-items: start;
+  }
 }

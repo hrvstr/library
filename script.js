@@ -44,6 +44,13 @@ document.addEventListener("DOMContentLoaded", () => {
     return button;
   }
 
+  function createText(text, parent) {
+    const element = document.createElement("p")
+    element.textContent = text;
+    parent.appendChild(element)
+    return element
+  }
+
   function addBookToDOM(book) {
     const listItem = document.createElement("li")
 
@@ -59,15 +66,11 @@ document.addEventListener("DOMContentLoaded", () => {
     metadata.classList.add("metadata")
     headerGroup.appendChild(metadata)
 
-    const author = document.createElement("p")
-    author.textContent = book.author;
-    metadata.appendChild(author)
+    const author = createText(book.author, metadata)
+    const pages = createText(book.pages + " pages", metadata)
+    const read = createText("", metadata)
 
-    const pages = document.createElement("p")
-    pages.textContent = book.pages + " pages"
-    metadata.appendChild(pages)
-
-    listItem.setAttribute("id", book.id)
+    // listItem.setAttribute("id", book.id)
 
     const buttons = document.createElement("div")
     buttons.classList.add("buttons")
@@ -86,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateReadButton() {
       readButtonSpan.textContent = book.isRead ? "Mark unread" : "Mark read"
       readButtonIcon.src = book.isRead ? "img/unread.svg" : "img/check.svg"
+      read.textContent = book.isRead ? "Not read yet" : "Read already"
     }
 
     const readButton = createButton("read-button", "img/check.svg", "", buttons)
