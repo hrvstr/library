@@ -24,17 +24,40 @@ document.addEventListener("DOMContentLoaded", () => {
     library.push(book)
   }
 
+  function createButton(className, iconSrc, labelText, target) {
+    // Element
+    const button = document.createElement("button")
+    button.classList.add(className)
+
+    // Icon
+    const icon = document.createElement("img")
+    icon.src = iconSrc
+    button.appendChild(icon)
+
+    // Label
+    const label = document.createElement("span")
+    label.textContent = labelText
+    button.appendChild(label)
+
+    // Append and return button
+    target.appendChild(button)
+    return button;
+  }
+
   function addBookToDOM(book) {
     const listItem = document.createElement("li")
 
+    const headerGroup = document.createElement("hgroup")
+    listItem.appendChild(headerGroup)
+
     const name = document.createElement("h2")
     name.textContent = book.name
-    listItem.appendChild(name)
+    headerGroup.appendChild(name)
 
     // Metadata
     const metadata = document.createElement("div")
     metadata.classList.add("metadata")
-    listItem.appendChild(metadata)
+    headerGroup.appendChild(metadata)
 
     const author = document.createElement("p")
     author.textContent = book.author;
@@ -44,18 +67,13 @@ document.addEventListener("DOMContentLoaded", () => {
     pages.textContent = book.pages + " pages"
     metadata.appendChild(pages)
 
-    // listItem.textContent = `${book.isRead ? "📗" : "📕"} ${book.name} by ${book.author} (${book.pages} pages)`
     listItem.setAttribute("id", book.id)
 
     const buttons = document.createElement("div")
     buttons.classList.add("buttons")
     listItem.appendChild(buttons)
 
-    // Delete button
-    const deleteButton = document.createElement("button")
-    deleteButton.classList.add("delete-button")
-    deleteButton.textContent = "Delete"
-    buttons.appendChild(deleteButton)
+    const deleteButton = createButton("delete-button", "./img/delete.svg", "Delete", buttons)
 
     deleteButton.addEventListener("click", () => {
       list.removeChild(listItem)
@@ -64,14 +82,20 @@ document.addEventListener("DOMContentLoaded", () => {
       })
     })
 
-    // Read button
-    const readButton = document.createElement("button")
-    readButton.classList.add("read-button")
-    readButton.textContent = "Read"
-    buttons.appendChild(readButton)
+    // Read Button
+    function updateReadButton() {
+      readButtonSpan.textContent = book.isRead ? "Mark unread" : "Mark read"
+      readButtonIcon.src = book.isRead ? "img/unread.svg" : "img/check.svg"
+    }
+
+    const readButton = createButton("read-button", "img/check.svg", "", buttons)
+    const readButtonSpan = readButton.querySelector("span");
+    const readButtonIcon = readButton.querySelector("img")
+    updateReadButton()
 
     readButton.addEventListener("click", () => {
       book.isRead = !book.isRead
+      updateReadButton()
       const index = library.findIndex((obj) => obj.id === book.id)
       library.splice(index, 1, book)
     })
@@ -91,6 +115,8 @@ document.addEventListener("DOMContentLoaded", () => {
   openDialogButton.addEventListener("click", () => {
     dialog.showModal()
   })
+
+  // dialog.showModal()
 
   // Close dialog button
   const closeButton = dialog.querySelector("#close-dialog")
@@ -115,6 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
       addBookToLibrary(book)
       addBookToDOM(book)
       form.reset()
+      dialog.close()
     } else {
       form.reportValidity()
     }

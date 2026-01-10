@@ -4,18 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library</title>
+    <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
     <script src="script.js"></script>
   </head>
   <body>
-    <header>
-      <h1>Library</h1>
-      <button id="open-dialog">New Book</button>
-    </header>
     <main>
+      <header>
+        <h1>Library</h1>
+        <button id="open-dialog">
+          <img src="./img/add.svg" /><span>Add Book</span>
+        </button>
+      </header>
       <ul id="library"></ul>
       <dialog closedby="any">
-        <button id="close-dialog" autofocus>Close</button>
+        <button id="close-dialog" autofocus>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="m8.382 17.025l-1.407-1.4L10.593 12L6.975 8.4L8.382 7L12 10.615L15.593 7L17 8.4L13.382 12L17 15.625l-1.407 1.4L12 13.41z"
+            />
+          </svg>
+        </button>
         <form action="">
           <p>
             <label for="name">Name:</label>
@@ -30,8 +45,8 @@
             <input type="number" min="0" name="pages" id="pages" required />
           </p>
           <p>
-            <label for="pages">Is read?:</label>
             <input type="checkbox" min="0" name="is-read" id="is-read" />
+            <label for="pages">Did you already read the book?</label>
           </p>
           <button type="submit" formmethod="dialog">Add Book</button>
         </form>

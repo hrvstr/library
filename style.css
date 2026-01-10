@@ -1,8 +1,17 @@
+:root {
+  --foreground: #d9e5f2;
+  --background: #1b1c1d;
+  --background-light: #242424;
+  --border: #313232;
+  --red: #ff4545;
+}
+
 body {
   font-family: system-ui, sans-serif;
   margin: 1rem;
-  background: black;
-  color: whitesmoke;
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 14px;
 }
 
 main {
@@ -17,7 +26,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 /* List */
@@ -35,8 +44,12 @@ ul {
 
 li {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  /* flex-direction: column; */
   gap: 0.5rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
 }
 
 h1,
@@ -63,15 +76,73 @@ p {
 
 button {
   all: unset;
-  background: white;
-  color: black;
+  background: var(--background-light);
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
   padding: 0.25rem 0.5rem;
-  border-radius: 4px;
+  border-radius: 8px;
   align-self: flex-start;
-  font-size: 12px;
+  font-weight: 600;
+  transition: background-color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+button:hover {
+  background: #3f638b;
+}
+
+.buttons button {
+  opacity: 0.75;
+}
+
+li:hover button {
+  opacity: 1;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background: var(--red);
 }
 
 /* Dialog */
+
+dialog {
+  background: var(--background);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+::backdrop {
+  background: black;
+  opacity: 0.75;
+}
+
+#close-dialog {
+  width: 32px;
+  height: 32px;
+  line-height: 1;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  border-radius: 100%;
+}
+
+/* Form */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 300px;
+}
 
 form p {
   display: flex;
@@ -79,6 +150,20 @@ form p {
   gap: 0.25rem;
 }
 
+p:has(#is-read) {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 label {
   font-size: 12px;
+}
+
+input[type="text"],
+input[type="number"] {
+  all: unset;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  padding: 0.25rem 0.5rem;
 }
