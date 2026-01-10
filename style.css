@@ -126,6 +126,10 @@ dialog hgroup {
   opacity: 0.75;
 }
 
+#open-dialog:hover {
+  background: var(--green);
+}
+
 #close-dialog {
   width: 32px;
   height: 32px;
@@ -173,6 +177,7 @@ input[type="number"] {
 }
 
 button[type="submit"] {
+  margin-top: 1rem;
   background: var(--green);
   align-self: start;
 }

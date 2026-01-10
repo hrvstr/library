@@ -22,17 +22,7 @@
           <h2>Add a Book to your Library</h2>
 
           <button id="close-dialog" autofocus>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="currentColor"
-                d="m8.382 17.025l-1.407-1.4L10.593 12L6.975 8.4L8.382 7L12 10.615L15.593 7L17 8.4L13.382 12L17 15.625l-1.407 1.4L12 13.41z"
-              />
-            </svg>
+            <img src="./img/close.svg" />
           </button>
         </hgroup>
         <form action="">
@@ -50,9 +40,12 @@
           </p>
           <p>
             <input type="checkbox" min="0" name="is-read" id="is-read" />
-            <label for="pages">Did you already read the book?</label>
+            <label for="is-read">Did you already read the book?</label>
           </p>
-          <button type="submit" formmethod="dialog">Add Book</button>
+          <button type="submit" formmethod="dialog">
+            <img src="./img/add.svg" />
+            <span>Add Book</span>
+          </button>
         </form>
       </dialog>
     </main>
